@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RentCar</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">🚗 RentCar</div>
+
+      <nav class="nav-links">
+        <a href="#">Ana Sayfa</a>
+        <a href="#">Araçlar</a>
+        <a href="#">Hakkımızda</a>
+        <a href="#">İletişim</a>
+      </nav>
+
+      <button class="login-btn">Giriş Yap</button>
+    </header>
+    <!-- FILTER BAR -->
+    <section class="filter-bar">
+      <input type="text" placeholder="Araç marka veya model ara..." />
+
+      <select>
+        <option>Yakıt Tipi</option>
+        <option>Benzin</option>
+        <option>Dizel</option>
+      </select>
+
+      <select>
+        <option>Vites Tipi</option>
+        <option>Otomatik</option>
+        <option>Manuel</option>
+      </select>
+
+      <button class="filter-btn">Filtrele</button>
+    </section>
+    <!-- VEHICLE LIST -->
+    <section class="vehicle-list">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54c" />
+        <div class="card-body">
+          <h3>BMW 320i</h3>
+          <p>2020 • Benzin • Otomatik</p>
+          <div class="price">₺750 / gün</div>
+          <button class="detail-btn">Detayları Gör</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6"
+        />
+        <div class="card-body">
+          <h3>Audi A4</h3>
+          <p>2019 • Dizel • Otomatik</p>
+          <div class="price">₺650 / gün</div>
+          <button class="detail-btn">Detayları Gör</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8"
+        />
+        <div class="card-body">
+          <h3>Mercedes C200</h3>
+          <p>2021 • Benzin • Otomatik</p>
+          <div class="price">₺850 / gün</div>
+          <button class="detail-btn">Detayları Gör</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" />
+        <div class="card-body">
+          <h3>Renault Clio</h3>
+          <p>2018 • Dizel • Manuel</p>
+          <div class="price">₺450 / gün</div>
+          <button class="detail-btn">Detayları Gör</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
