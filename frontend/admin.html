@@ -1,0 +1,46 @@
+<div class="admin-container">
+  <!-- SOL MENU -->
+  <aside class="sidebar">
+    <h2>RentCar</h2>
+    <ul>
+      <li>Araçlar</li>
+      <li>Rezervasyonlar</li>
+      <li>Kullanıcılar</li>
+    </ul>
+  </aside>
+
+  <!-- ANA ALAN -->
+  <main class="admin-main">
+    <h1>Araç Ekle</h1>
+
+    <form id="carForm" class="admin-form">
+      <input id="brand" placeholder="Marka" required />
+      <input id="model" placeholder="Model" required />
+      <input id="year" type="number" placeholder="Yıl" required />
+
+      <select id="fuel">
+        <option>Benzin</option>
+        <option>Dizel</option>
+      </select>
+
+      <select id="gear">
+        <option>Otomatik</option>
+        <option>Manuel</option>
+      </select>
+
+      <input id="price" type="number" placeholder="Fiyat" required />
+      <input id="image" placeholder="image/xxx.png" />
+
+      <textarea id="desc" placeholder="Açıklama"></textarea>
+
+      <button type="submit">Kaydet</button>
+    </form>
+
+    <h2>Eklenen Araçlar</h2>
+    <div id="adminCarList" class="vehicle-list"></div>
+    <h2>Rezervasyonlar</h2>
+    <div id="reservationList" class="vehicle-list"></div>
+  </main>
+</div>
+
+<script src="js/admin.js"></script>

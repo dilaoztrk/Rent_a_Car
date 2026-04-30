@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Araç Detayı</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo">🚗 RentCar</div>
+
+      <nav class="nav-links">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="index.html">Araçlar</a>
+        <a href="about.html">Hakkımızda</a>
+        <a href="index.html#contact">İletişim</a>
+      </nav>
+    </header>
+
+    <!-- DETAY -->
+    <section class="vehicle-detail">
+      <div class="detail-container">
+        <img id="carImage" />
+
+        <div class="detail-info">
+          <h1 id="carTitle"></h1>
+
+          <p id="carInfo"></p>
+
+          <h2 id="carPrice"></h2>
+
+          <div class="rental-box">
+            <label>Alış Tarihi</label>
+            <input type="date" id="startDate" />
+
+            <label>İade Tarihi</label>
+            <input type="date" id="endDate" />
+
+            <p id="totalPrice"></p>
+
+            <button id="rentBtn" class="detail-btn" onclick="rentCar()">
+              Kirala
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/detail.js"></script>
+    <div class="features">
+      <h3>Özellikler</h3>
+      <ul id="featureList"></ul>
+    </div>
+
+    <p id="carDesc"></p>
+    <p id="carStatus"></p>
+    <div id="toast" class="toast"></div>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="footer">
+      <div class="footer-content">
+        <h3>İletişim</h3>
+        <p>📍 İstanbul, Türkiye</p>
+        <p>📞 +90 555 555 55 55</p>
+        <p>✉️ info@rentcar.com</p>
+      </div>
+    </footer>
+  </body>
+</html>
