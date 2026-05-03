@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,12 +24,8 @@ public class UserService {
 
     // 🔹 ID İLE KULLANICI
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    // 🔹 KAYDET (GENEL)
-    public User saveUser(User user) {
-        return userRepository.save(user);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
     }
 
     // 🔹 SİL
@@ -36,7 +33,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    // ✅ REGISTER
+    // ✅ USER REGISTER
     public User register(User user) {
 
         // email kontrol
@@ -44,10 +41,32 @@ public class UserService {
             throw new RuntimeException("Bu email zaten kayıtlı");
         }
 
-        user.setIsActive(true);
-        user.setRegistrationDate(java.time.LocalDate.now());
+        // TC kontrol
+        if (user.getNationalId() == null || user.getNationalId().length() != 11) {
+            throw new RuntimeException("TC Kimlik 11 haneli olmalı");
+        }
 
-        // 🔥 ŞİFRE HASH
+        user.setRole("USER");
+        user.setIsActive(true);
+        user.setRegistrationDate(LocalDate.now());
+
+        // 🔐 ŞİFRE HASH
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        return userRepository.save(user);
+    }
+
+    // ✅ ADMIN REGISTER
+    public User registerAdmin(User user) {
+
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException("Bu email zaten kayıtlı");
+        }
+
+        user.setRole("ADMIN");
+        user.setIsActive(true);
+        user.setRegistrationDate(LocalDate.now());
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
@@ -59,7 +78,6 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
 
-        // 🔥 HASH KARŞILAŞTIRMA
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Şifre yanlış");
         }

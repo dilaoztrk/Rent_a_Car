@@ -2,6 +2,7 @@ package com.rentacar.controller;
 
 import com.rentacar.entity.User;
 import com.rentacar.service.UserService;
+
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
@@ -26,23 +27,24 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
-    // 🔥 BURADAN SONRA EKLİYORSUN
-
+    // ✅ REGISTER USER
     @PostMapping("/register")
     public User register(@RequestBody User user) {
         return userService.register(user);
     }
 
+    // ✅ REGISTER ADMIN
+    @PostMapping("/register-admin")
+    public User registerAdmin(@RequestBody User user) {
+        return userService.registerAdmin(user);
+    }
+
+    // ✅ LOGIN
     @PostMapping("/login")
     public User login(@RequestBody User user) {
         return userService.login(user.getEmail(), user.getPassword());
