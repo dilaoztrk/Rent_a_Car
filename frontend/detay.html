@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMW 320i - RentCar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/detay.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">
+          <img src="image/logo.png" alt="RentCar Logo" class="logo-img" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="araclar.html">Araçlar</a></li>
+          <li><a href="#">Hakkımızda</a></li>
+          <li><a href="#">Hizmetler</a></li>
+          <li><a href="#">İletişim</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="login.html" class="btn-login">Giriş / Kayıt</a>
+        </div>
+        <button class="hamburger" id="hamburger">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="index.html">Ana Sayfa</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="araclar.html">Araçlar</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>BMW 320i</span>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="detay-main container">
+      <!-- SOL: Galeri + Açıklama -->
+      <section class="detay-sol">
+        <!-- Galeri -->
+        <div class="galeri">
+          <div class="galeri-ana">
+            <span class="musait-badge">Müsait</span>
+            <button class="galeri-btn prev" id="prevBtn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW 320i"
+              class="galeri-img"
+              id="mainImg"
+            />
+            <button class="galeri-btn next" id="nextBtn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="galeri-thumb" id="thumbContainer">
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW dış"
+              class="thumb active"
+              data-index="0"
+            />
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW yan"
+              class="thumb"
+              data-index="1"
+            />
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW iç"
+              class="thumb"
+              data-index="2"
+            />
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW gösterge"
+              class="thumb"
+              data-index="3"
+            />
+            <img
+              src="image/bmw-3-serisi.jpeg"
+              alt="BMW koltuk"
+              class="thumb"
+              data-index="4"
+            />
+          </div>
+        </div>
+
+        <!-- Araç Açıklaması -->
+        <div class="aciklama-card">
+          <h2>Araç Açıklaması</h2>
+          <p>
+            BMW 320i, konforu, performansı ve şık tasarımıyla her yolculuğunuzu
+            özel kılar.<br />
+            Gerek şehir içi gerek uzun yolculuklarda üstün sürüş deneyimi
+            sunar.<br />
+            Yüksek güvenlik donanımları ve modern iç tasarımı ile premium bir
+            hizmet sağlar.
+          </p>
+          <div class="ozellik-ikonlar">
+            <div class="oz-ikon">
+              <i class="fas fa-snowflake"></i><span>Klima</span>
+            </div>
+            <div class="oz-ikon">
+              <i class="fas fa-map-marker-alt"></i><span>Navigasyon</span>
+            </div>
+            <div class="oz-ikon">
+              <i class="fab fa-bluetooth-b"></i><span>Bluetooth</span>
+            </div>
+            <div class="oz-ikon">
+              <i class="fas fa-video"></i><span>Geri Görüş Kamerası</span>
+            </div>
+            <div class="oz-ikon">
+              <i class="fas fa-tachometer-alt"></i><span>Hız Sabitleyici</span>
+            </div>
+            <div class="oz-ikon">
+              <i class="fas fa-parking"></i><span>Park Sensörü</span>
+            </div>
+            <p id="accessibleInfo"></p>
+          </div>
+        </div>
+
+        <!-- Teknik Bilgiler -->
+        <div class="teknik-card">
+          <h2>Teknik Bilgiler</h2>
+          <div class="teknik-grid">
+            <div class="teknik-item">
+              <span class="teknik-label">Motor</span>
+              <span class="teknik-val">2.0L B48</span>
+            </div>
+            <div class="teknik-item">
+              <span class="teknik-label">Güç</span>
+              <span class="teknik-val">184 HP</span>
+            </div>
+            <div class="teknik-item">
+              <span class="teknik-label">Yakıt Tüketimi</span>
+              <span class="teknik-val">6.1 L / 100 km</span>
+            </div>
+            <div class="teknik-item">
+              <span class="teknik-label">Bagaj Hacmi</span>
+              <span class="teknik-val">480 L</span>
+            </div>
+            <div class="teknik-item">
+              <span class="teknik-label">Vites</span>
+              <span class="teknik-val">8 İleri Otomatik</span>
+            </div>
+            <div class="teknik-item">
+              <span class="teknik-label">Çekiş</span>
+              <span class="teknik-val">Arkadan İtiş</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SAĞ: Bilgi + Rezervasyon -->
+      <aside class="detay-sag">
+        <div class="bilgi-card">
+          <div class="bilgi-header">
+            <div>
+              <h1 class="arac-adi">BMW 320i</h1>
+              <span class="arac-kategori">Premium Sedan</span>
+            </div>
+            <div class="fiyat-box">
+              <span class="fiyat">₺900</span>
+              <span class="fiyat-gun">/ gün</span>
+            </div>
+          </div>
+
+          <div class="arac-meta">
+            <span><i class="far fa-calendar-alt"></i> 2021</span>
+            <span><i class="fas fa-gas-pump"></i> Benzin</span>
+            <span><i class="fas fa-cog"></i> Otomatik</span>
+            <span><i class="fas fa-user-friends"></i> 5 Kişilik</span>
+          </div>
+
+          <div class="ozellikler">
+            <h3>Özellikler</h3>
+            <div class="oz-grid">
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Klima
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Hız Sabitleyici
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Navigasyon
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Park Sensörü
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Geri Görüş Kamerası
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Start / Stop
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> Bluetooth
+              </div>
+              <div class="oz-item">
+                <i class="fas fa-check-circle"></i> AUX / USB
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rezervasyon Formu -->
+        <div class="rezervasyon-card">
+          <h3>Rezervasyon Yap</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Teslim Tarihi</label>
+              <div class="input-icon">
+                <input type="date" id="teslimTarih" class="form-input" />
+                <i class="far fa-calendar-alt"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Teslim Saati</label>
+              <div class="input-icon">
+                <select id="teslimSaat" class="form-input">
+                  <option>08:00</option>
+                  <option>09:00</option>
+                  <option selected>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>İade Tarihi</label>
+              <div class="input-icon">
+                <input type="date" id="iadeTarih" class="form-input" />
+                <i class="far fa-calendar-alt"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>İade Saati</label>
+              <div class="input-icon">
+                <select id="iadeSaat" class="form-input">
+                  <option>08:00</option>
+                  <option>09:00</option>
+                  <option selected>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                  <option>18:00</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="toplam-fiyat">
+            <span>Toplam Fiyat</span>
+            <div>
+              <span class="toplam-tutar" id="toplamFiyat">₺0</span>
+              <span class="toplam-gun" id="gunSayisi"></span>
+            </div>
+          </div>
+
+          <button class="btn-rezervasyon" id="rezervasyonBtn">
+            <i class="far fa-calendar-check"></i>
+            Rezervasyonu Tamamla
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
+        <h2>Rezervasyon Başarılı!</h2>
+        <p>
+          BMW 320i için rezervasyonunuz alınmıştır.<br />En kısa sürede sizinle
+          iletişime geçeceğiz.
+        </p>
+        <button class="btn-modal-kapat" id="modalKapat">Tamam</button>
+      </div>
+    </div>
+
+    <script src="js/detay.js"></script>
+  </body>
+</html>

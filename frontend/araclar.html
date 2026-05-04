@@ -1,152 +1,352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RentCar - Araçlar</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/araclar.css">
-</head>
-<body>
- 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="navbar-logo">
-      <img src="car-icon.svg" alt="logo">
-      <span>RentCar</span>
-    </div>
-    <ul class="navbar-links">
-      <li><a href="index.html">Ana Sayfa</a></li>
-      <li><a href="araclar.html" class="active-link">Araçlar</a></li>
-      <li><a href="index.html#hakkimizda">Hakkımızda</a></li>
-      <li><a href="#">Hizmetler</a></li>
-      <li><a href="index.html#iletisim">İletişim</a></li>
-    </ul>
-    <div class="navbar-buttons">
-      <a href="login.html" class="btn-solid">Giriş / Kayıt</a>
-    </div>
-  </nav>
- 
-  <!-- ARAÇLAR SAYFASI -->
-  <div class="araclar-layout">
- 
-    <!-- SOL FİLTRE PANELİ -->
-    <aside class="filtre-panel">
-      <div class="filtre-header">
-        <h3>Filtrele</h3>
-        <span>⚙️</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentCar - Araçlar</title>
+    <link rel="stylesheet" href="css/araclar.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="navbar-logo">
+        <img src="image/logo.png" alt="logo" />
+        <span>Rentiva</span>
       </div>
- 
-      <div class="filtre-grup">
-        <h4>Araç Tipi</h4>
-        <label class="filtre-item">
-          <input type="checkbox" value="" checked onchange="filtrele()"> Tümü
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Sedan" onchange="filtrele()"> Sedan
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="SUV" onchange="filtrele()"> SUV
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Hatchback" onchange="filtrele()"> Hatchback
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Station Wagon" onchange="filtrele()"> Station Wagon
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Cabrio" onchange="filtrele()"> Cabrio
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Minivan" onchange="filtrele()"> Minivan
-        </label>
+      <ul class="nav-links">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="araclar.html" class="active">Araçlar</a></li>
+        <li><a href="index.html #hakkimizda">Hakkımızda</a></li>
+        <li><a href="index.html">Hizmetler</a></li>
+        <li><a href="index.html">İletişim</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="nav-icon-btn" id="themeToggle" title="Tema değiştir">
+          🌙
+        </button>
+        <button class="nav-icon-btn notif-btn" title="Bildirimler">
+          🔔<span class="notif-badge">2</span>
+        </button>
+        <a href="login.html" class="btn-ghost">Giriş Yap</a>
+        <a href="register.html" class="btn-primary">Kayıt Ol</a>
       </div>
- 
-      <div class="filtre-grup">
-        <h4>Yakıt Türü</h4>
-        <label class="filtre-item">
-          <input type="checkbox" value="Benzin" onchange="filtrele()"> Benzin
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Dizel" onchange="filtrele()"> Dizel
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Hibrit" onchange="filtrele()"> Hibrit
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Elektrik" onchange="filtrele()"> Elektrik
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="LPG" onchange="filtrele()"> LPG
-        </label>
-      </div>
- 
-      <div class="filtre-grup">
-        <h4>Vites Türü</h4>
-        <label class="filtre-item">
-          <input type="checkbox" value="Otomatik" onchange="filtrele()"> Otomatik
-        </label>
-        <label class="filtre-item">
-          <input type="checkbox" value="Manuel" onchange="filtrele()"> Manuel
-        </label>
-      </div>
- 
-      <div class="filtre-grup">
-        <h4>Fiyat Aralığı</h4>
-        <div class="price-range">
-          <span id="minFiyat">₺0</span>
-          <span id="maxFiyat">₺10.000+</span>
+    </nav>
+
+    <!-- ANA İÇERİK -->
+    <div class="main-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="filter-card">
+          <div class="filter-header">
+            <span class="filter-title">Filtreleme</span>
+            <button class="btn-clear" id="btnClear">Temizle</button>
+          </div>
+
+          <!-- TARİH ARALIĞI -->
+          <div class="filter-section date-section">
+            <div class="date-range-title">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              Tarih Aralığı
+            </div>
+            <div class="date-input-group">
+              <label>Başlangıç Tarihi</label>
+              <input type="date" id="startDate" />
+            </div>
+            <div class="date-input-group" style="margin-top: 10px">
+              <label>Bitiş Tarihi</label>
+              <input type="date" id="endDate" />
+            </div>
+            <div class="date-days-badge" id="daysBadge">— gün seçildi</div>
+          </div>
+
+          <!-- ARAÇ MARKASI -->
+          <div class="filter-section">
+            <div class="filter-section-label">Araç Markası</div>
+            <select class="filter-select" id="filterBrand">
+              <option value="">Tümü</option>
+              <option value="BMW">BMW</option>
+              <option value="Audi">Audi</option>
+              <option value="Mercedes">Mercedes</option>
+              <option value="Volkswagen">Volkswagen</option>
+              <option value="Renault">Renault</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Peugeot">Peugeot</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Honda">Honda</option>
+              <option value="Ford">Ford</option>
+            </select>
+          </div>
+
+          <!-- VİTES TİPİ -->
+          <div class="filter-section">
+            <div class="filter-section-label">Vites Tipi</div>
+            <select class="filter-select" id="filterGear">
+              <option value="">Tümü</option>
+              <option value="Otomatik">Otomatik</option>
+              <option value="Manuel">Manuel</option>
+            </select>
+          </div>
+
+          <!-- YAKIT TİPİ -->
+          <div class="filter-section">
+            <div class="filter-section-label">Yakıt Tipi</div>
+            <select class="filter-select" id="filterFuel">
+              <option value="">Tümü</option>
+              <option value="Benzin">Benzin</option>
+              <option value="Dizel">Dizel</option>
+              <option value="Hibrit">Hibrit</option>
+              <option value="Elektrik">Elektrik</option>
+              <option value="LPG">LPG</option>
+            </select>
+          </div>
+
+          <!-- GÜNLÜK FİYAT ARALIĞI -->
+          <div class="filter-section">
+            <div class="filter-section-label">Günlük Fiyat Aralığı</div>
+            <input
+              type="range"
+              id="priceRange"
+              min="0"
+              max="10000"
+              value="10000"
+              step="100"
+            />
+            <div class="range-values">
+              <span>₺0</span>
+              <span id="priceRangeVal">₺10.000</span>
+            </div>
+          </div>
+
+          <!-- YIL ARALIĞI -->
+          <div class="filter-section">
+            <div class="filter-section-label">Yıl Aralığı</div>
+            <input
+              type="range"
+              id="yearRange"
+              min="2010"
+              max="2025"
+              value="2010"
+              step="1"
+              class="year-slider"
+            />
+            <div class="range-values">
+              <span id="yearMinVal">2010</span>
+              <span id="yearMaxVal">2025</span>
+            </div>
+            <div class="year-inputs-row">
+              <input
+                type="number"
+                id="yearMin"
+                class="year-input"
+                min="2010"
+                max="2025"
+                value="2010"
+              />
+              <span>—</span>
+              <input
+                type="number"
+                id="yearMax"
+                class="year-input"
+                min="2010"
+                max="2025"
+                value="2025"
+              />
+            </div>
+          </div>
+          <div
+            class="filter-section"
+            style="border-bottom: none; margin-bottom: 14px"
+          >
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text);
+              "
+            >
+              <input
+                type="checkbox"
+                id="filterAccessible"
+                style="
+                  width: 16px;
+                  height: 16px;
+                  accent-color: #2563eb;
+                  cursor: pointer;
+                "
+              />
+              ♿ Engelli Dostu Araçlar
+            </label>
+          </div>
+          <button class="btn-filter-apply" id="btnApply">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+              <line x1="11" y1="18" x2="13" y2="18" />
+            </svg>
+            Filtrele
+          </button>
         </div>
-        <input type="range" id="maxFiyatRange" min="500" max="10000" step="100" value="10000" oninput="updateFiyat(this.value)">
-      </div>
- 
-      <div class="filtre-grup">
-        <h4>Yıl Aralığı</h4>
-        <div class="yil-range">
-          <select id="minYil" onchange="filtrele()">
-            <option value="">Min Yıl</option>
-            <option>2018</option><option>2019</option><option>2020</option>
-            <option>2021</option><option>2022</option><option>2023</option><option>2024</option>
-          </select>
-          <select id="maxYil" onchange="filtrele()">
-            <option value="">Max Yıl</option>
-            <option>2018</option><option>2019</option><option>2020</option>
-            <option>2021</option><option>2022</option><option>2023</option><option>2024</option>
-          </select>
+      </aside>
+
+      <!-- ARAÇ LİSTESİ -->
+      <main class="content">
+        <div class="content-header">
+          <p class="results-count">
+            Toplam <strong id="carCount">0</strong> araç bulundu
+          </p>
+          <div class="content-controls">
+            <select class="sort-select" id="sortSelect">
+              <option value="recommended">Sıralama: Önerilen</option>
+              <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
+              <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+              <option value="year-desc">Yıl: En Yeni</option>
+              <option value="year-asc">Yıl: En Eski</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridViewBtn" title="Grid">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                </svg>
+              </button>
+              <button class="view-btn" id="listViewBtn" title="Liste">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
- 
-      <button class="btn-filtre-uygula" onclick="filtrele()">⚙️ Filtreleri Uygula</button>
-      <button class="btn-filtre-temizle" onclick="temizleFiltre()">🔄 Temizle</button>
-    </aside>
- 
-    <!-- SAĞ ARAÇ LİSTESİ -->
-    <div class="arac-listesi">
-      <div class="liste-header">
-        <span id="aracSayisi">Yükleniyor...</span>
-        <div class="siralama">
-          <label>Sırala:</label>
-          <select id="siralama" onchange="sirala()">
-            <option value="onerilen">Önerilen</option>
-            <option value="fiyat-asc">Fiyat (Düşük → Yüksek)</option>
-            <option value="fiyat-desc">Fiyat (Yüksek → Düşük)</option>
-            <option value="yil-desc">En Yeni</option>
-          </select>
-          <button class="view-btn active" onclick="setView('grid')">▦</button>
-          <button class="view-btn" onclick="setView('list')">☰</button>
+
+        <div class="cars-grid" id="carsGrid"></div>
+        <div class="pagination" id="pagination"></div>
+
+        <!-- ALT BİLGİ BANDI -->
+        <div class="info-band">
+          <div class="info-item">
+            <div class="info-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <strong>Güvenli Sürüş</strong>
+              <p>Tüm araçlarımız düzenli bakımlıdır.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <strong>7/24 Destek</strong>
+              <p>Her zaman yanınızdayız.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <div>
+              <strong>En Uygun Fiyatlar</strong>
+              <p>Bütçenize uygun seçenekler.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="1" y="3" width="15" height="13" />
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                <circle cx="5.5" cy="18.5" r="2.5" />
+                <circle cx="18.5" cy="18.5" r="2.5" />
+              </svg>
+            </div>
+            <div>
+              <strong>Geniş Araç Filosu</strong>
+              <p>İhtiyacınıza uygun araçlar.</p>
+            </div>
+          </div>
         </div>
-      </div>
- 
-      <div class="arac-grid" id="aracGrid">
-        <div class="yukleniyor">Araçlar yükleniyor...</div>
-      </div>
- 
-      <div class="pagination" id="pagination"></div>
+      </main>
     </div>
- 
-  </div>
- 
-  <script src="js/araclar.js"></script>
-</body>
+
+    <script src="js/araclar.js"></script>
+  </body>
 </html>
- 
