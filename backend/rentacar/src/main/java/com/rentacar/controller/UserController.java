@@ -1,6 +1,7 @@
 package com.rentacar.controller;
 
 import com.rentacar.entity.User;
+import com.rentacar.security.JwtUtil;
 import com.rentacar.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @GetMapping
     public List<User> getAllUsers() {
@@ -56,7 +58,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody Map<String, String> body) {
-        return userService.login(body.get("email"), body.get("password"));
+    public Map<String, Object> login(@RequestBody Map<String, String> body) {
+        User user = userService.login(body.get("email"), body.get("password"));
+        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+        return Map.of(
+            "token", token,
+            "user", user
+        );
     }
 }
