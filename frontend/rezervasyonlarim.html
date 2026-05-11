@@ -1,105 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Rezervasyonlarım</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <style>
+  <title>Rezervasyonlarım</title>
 
-        body{
-            font-family:Arial;
-            background:#0a0a0a;
-            color:white;
-            padding:40px;
-        }
+  <link rel="stylesheet" href="css/style.css">
 
-        .kart{
-            background:#1a1a2e;
-            padding:24px;
-            border-radius:16px;
-            margin-bottom:20px;
-        }
+  <style>
 
-        img{
-            width:100%;
-            max-width:300px;
-            border-radius:12px;
-            margin-bottom:16px;
-        }
+    body{
+      background:#0a0a0a;
+      color:white;
+      font-family:Arial;
+      padding-top:90px;
+    }
 
-    </style>
+    .container{
+      max-width:1000px;
+      margin:auto;
+      padding:30px;
+    }
+
+    .ust{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+    }
+
+    .kart{
+      background:#1a1a2e;
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:24px;
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+    }
+
+    .kart img{
+      width:260px;
+      border-radius:12px;
+    }
+
+    .bilgi{
+      flex:1;
+    }
+
+    .bilgi h2{
+      margin-bottom:16px;
+      color:#4e8cff;
+    }
+
+    .bilgi p{
+      margin-bottom:10px;
+      color:#ddd;
+    }
+
+    .fiyat{
+      font-size:26px;
+      font-weight:bold;
+      margin-top:14px;
+      color:white;
+    }
+
+    .btnlar{
+      margin-top:20px;
+    }
+
+    button{
+      padding:12px 18px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      margin-right:12px;
+      font-weight:bold;
+    }
+
+    .iptal{
+      background:#ff4d4d;
+      color:white;
+    }
+
+    .fatura{
+      background:#4e8cff;
+      color:white;
+    }
+
+    .anasayfa{
+      background:white;
+      color:black;
+    }
+
+  </style>
+
 </head>
+
 <body>
 
-<h1>Rezervasyonlarım</h1>
+<nav class="navbar scrolled">
 
-<div id="rezervasyonlar"></div>
+  <div class="navbar-logo">
+    <img src="image/logo.png">
+    <span>Rentiva</span>
+  </div>
+
+</nav>
+
+<div class="container">
+
+  <div class="ust">
+
+    <h1>Rezervasyonlarım</h1>
+
+    <button class="anasayfa"
+            onclick="anasayfa()">
+
+      Ana Sayfaya Dön
+
+    </button>
+
+  </div>
+
+  <div id="rezervasyonlar"></div>
+
+</div>
 
 <script>
 
-async function rezervasyonlariGetir() {
+async function rezervasyonlariGetir(){
 
-    const userId = 1;
-    const response = await fetch(
-        `http://localhost:8080/api/reservations/customer/${userId}`
+  const userId = 1;
+
+  const response = await fetch(
+    `http://localhost:8080/api/reservations/customer/${userId}`
+  );
+
+  const data = await response.json();
+
+  const container =
+    document.getElementById(
+      "rezervasyonlar"
     );
 
-    const data = await response.json();
+  container.innerHTML = "";
 
-    const container =
-        document.getElementById("rezervasyonlar");
+  const aktifler =
+    data.filter(
+      r => r.status !== "CANCELLED"
+    );
 
-    container.innerHTML = "";
+  if(aktifler.length === 0){
 
-    data.filter(r => r.status !== "CANCELLED").forEach(r => {
+    container.innerHTML =
+      "<p>Henüz rezervasyon yok.</p>";
 
-        container.innerHTML += `
+    return;
+  }
 
-            <div class="kart">
+  aktifler.forEach(r => {
 
-                <img src="http://127.0.0.1:5500/${r.vehicle.imageUrl}">
+    container.innerHTML += `
 
-                <h2>${r.vehicle.plateNo}</h2>
+      <div class="kart">
 
-                <p>Başlangıç:
-                ${r.startDate}</p>
+        <img
+        src="http://127.0.0.1:5500/${r.vehicle.imageUrl}">
 
-                <p>Bitiş:
-                ${r.endDate}</p>
+        <div class="bilgi">
 
-                <p>Toplam:
-                ₺${r.totalAmount}</p>
-                <button onclick="rezervasyonIptal(${r.id})">
+          <h2>
+            ${r.vehicle.plateNo}
+          </h2>
 
-                    İptal Et </button>
+          <p>
+            Başlangıç:
+            ${r.startDate}
+          </p>
 
-            </div>
+          <p>
+            Bitiş:
+            ${r.endDate}
+          </p>
 
-        `;
-    });
+          <p>
+            Durum:
+            ${r.status}
+          </p>
+
+          <div class="fiyat">
+
+            ₺${r.totalAmount}
+
+          </div>
+
+          <div class="btnlar">
+
+            <button
+            class="iptal"
+            onclick="rezervasyonIptal(${r.id})">
+
+              İptal Et
+
+            </button>
+
+            <button
+            class="fatura"
+            onclick="faturayaGit(${r.id})">
+
+              Faturayı Gör
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+  });
+}
+
+async function rezervasyonIptal(id){
+
+  const response = await fetch(
+    `http://localhost:8080/api/reservations/${id}/cancel`,
+    {
+      method:"PUT"
+    }
+  );
+
+  if(response.ok){
+
+    alert("Rezervasyon iptal edildi");
+
+    rezervasyonlariGetir();
+
+  }else{
+
+    alert("İşlem başarısız");
+  }
+}
+
+function faturayaGit(id){
+
+  localStorage.setItem(
+    "invoiceId",
+    1
+  );
+
+  window.location.href =
+    "fatura.html";
+}
+
+function anasayfa(){
+
+  window.location.href =
+    "index.html";
 }
 
 rezervasyonlariGetir();
-async function rezervasyonIptal(id) {
 
-    const response = await fetch(
-        `http://localhost:8080/api/reservations/${id}/cancel`,
-        {
-            method: "PUT"
-        }
-    );
-
-    if(response.ok){
-
-        alert("Rezervasyon iptal edildi");
-
-        rezervasyonlariGetir();
-
-    }else{
-
-        alert("İptal işlemi başarısız");
-    }
-}
 </script>
 
 </body>
