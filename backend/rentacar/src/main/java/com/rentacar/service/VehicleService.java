@@ -18,6 +18,9 @@ public class VehicleService {
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
     }
+    public List<Vehicle> getVehiclesByCompany(Long companyId) {
+    return vehicleRepository.findByCompany_Id(companyId);
+}
 
     public List<Vehicle> getAvailableVehicles(LocalDate startDate, LocalDate endDate) {
         return vehicleRepository.findAvailableVehicles(startDate, endDate);

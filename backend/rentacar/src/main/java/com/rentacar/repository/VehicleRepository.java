@@ -29,5 +29,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     List<Vehicle> findAvailableVehicles(
         @Param("startDate") LocalDate startDate,
         @Param("endDate") LocalDate endDate
+    
     );
+    List<Vehicle> findByCompany_Id(Long companyId);
 }

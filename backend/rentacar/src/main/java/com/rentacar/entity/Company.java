@@ -21,12 +21,25 @@ public class Company {
     @Column(nullable = false, unique = true)
     private String taxNo;
 
-    @NotBlank(message = "Address cannot be empty")
-    private String address;
+    @NotBlank(message = "City cannot be empty")
+    private String city;
+
+    @NotBlank(message = "District cannot be empty")
+    private String district;
+
+    @NotBlank(message = "Neighborhood cannot be empty")
+    private String neighborhood;
+
+    @NotBlank(message = "Street cannot be empty")
+    private String street;
+
+    @NotBlank(message = "Building number cannot be empty")
+    private String buildingNo;
 
     @NotBlank(message = "Phone cannot be empty")
-    private String phone;
+    private String companyPhone;
 
     @Email(message = "Invalid email format")
-    private String email;
+    @Column(unique = true)
+    private String companyEmail;
 }

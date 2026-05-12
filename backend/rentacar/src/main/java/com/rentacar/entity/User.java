@@ -37,9 +37,6 @@ public class User {
     private String driverLicenseNumber;
     private String licenseImage;
 
-    private String companyName;
-    private String taxNumber;
-    
-    private String city;
-    private String district;
+
+   
 }

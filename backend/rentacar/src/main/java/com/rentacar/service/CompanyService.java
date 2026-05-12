@@ -25,12 +25,9 @@ public class CompanyService {
 
     @Transactional
     public Company saveCompany(Company company) {
+
         if (company == null) {
             throw new RuntimeException("Company cannot be null");
-        }
-
-        if (companyRepository.existsByCompanyName(company.getCompanyName())) {
-            throw new RuntimeException("Company already exists");
         }
 
         return companyRepository.save(company);
@@ -38,6 +35,7 @@ public class CompanyService {
 
     @Transactional
     public void deleteCompany(Long id) {
+
         if (!companyRepository.existsById(id)) {
             throw new RuntimeException("Company not found with id: " + id);
         }

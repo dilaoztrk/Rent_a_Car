@@ -22,31 +22,61 @@ public class VehicleController {
         return vehicleService.getAllVehicles();
     }
 
+    @GetMapping("/company/{companyId}")
+    public List<Vehicle> getCompanyVehicles(
+            @PathVariable Long companyId
+    ) {
+
+        return vehicleService.getVehiclesByCompany(companyId);
+    }
+
     @GetMapping("/available")
     public List<Vehicle> getAvailableVehicles(
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate startDate,
+
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate endDate
     ) {
-        return vehicleService.getAvailableVehicles(startDate, endDate);
+
+        return vehicleService.getAvailableVehicles(
+                startDate,
+                endDate
+        );
     }
 
     @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable Long id) {
+    public Vehicle getVehicleById(
+            @PathVariable Long id
+    ) {
+
         return vehicleService.getVehicleById(id);
     }
 
     @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
+    public Vehicle createVehicle(
+            @RequestBody Vehicle vehicle
+    ) {
+
         return vehicleService.saveVehicle(vehicle);
     }
 
     @PutMapping("/{id}")
-    public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+    public Vehicle updateVehicle(
+            @PathVariable Long id,
+            @RequestBody Vehicle vehicle
+    ) {
+
         return vehicleService.updateVehicle(id, vehicle);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteVehicle(@PathVariable Long id) {
+    public void deleteVehicle(
+            @PathVariable Long id
+    ) {
+
         vehicleService.deleteVehicle(id);
     }
 }

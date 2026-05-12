@@ -263,15 +263,16 @@
                 ></textarea>
               </div>
               <div class="input-group full-width">
-                <label>Araç Görseli (URL)</label>
-                <input
-                  type="text"
-                  id="gorsel_url"
-                  placeholder="https://example.com/arac.jpg"
-                />
-              </div>
+  <label>Araç Görseli</label>
+  <input
+    type="file"
+    id="vehicleImage"
+    accept="image/*"
+  />
+</div>
             </div>
 
+            
             <!-- TEKNİK BİLGİLER -->
             <div
               id="tab-teknik-bilgiler"
@@ -351,20 +352,21 @@
               <table class="arac-table">
                 <thead>
                   <tr>
-                    <th>Plaka</th>
-                    <th>Araç</th>
-                    <th>Kategori</th>
-                    <th>Yakıt</th>
-                    <th>Vites</th>
-                    <th>Yıl</th>
-                    <th>Günlük Ücret</th>
-                    <th>Durum</th>
-                    <th>İşlemler</th>
-                  </tr>
+  <th>Foto</th>
+  <th>Plaka</th>
+  <th>Araç</th>
+  <th>Kategori</th>
+  <th>Yakıt</th>
+  <th>Vites</th>
+  <th>Yıl</th>
+  <th>Günlük Ücret</th>
+  <th>Durum</th>
+  <th>İşlemler</th>
+</tr>
                 </thead>
                 <tbody id="aracTableBody">
                   <tr>
-                    <td colspan="9" class="empty-row">Henüz araç eklenmedi.</td>
+                    <td colspan="10" class="empty-row">Henüz araç eklenmedi.</td>
                   </tr>
                 </tbody>
               </table>

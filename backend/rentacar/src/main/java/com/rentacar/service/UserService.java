@@ -5,6 +5,10 @@ import com.rentacar.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.rentacar.entity.Company;
+import com.rentacar.entity.Manager;
+import com.rentacar.repository.CompanyRepository;
+import com.rentacar.repository.ManagerRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +18,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
+private final ManagerRepository managerRepository;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -56,36 +62,60 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ✅ ADMIN REGISTER
-    public User registerAdmin(User user) {
+   // ✅ ADMIN REGISTER
+public User registerAdmin(User user, Company company) {
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Bu email zaten kayıtlı");
-        }
-
-        user.setRole("ADMIN");
-        user.setIsActive(true);
-        user.setRegistrationDate(LocalDate.now());
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        return userRepository.save(user);
+    if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        throw new RuntimeException("Bu email zaten kayıtlı");
     }
+
+    user.setRole("ADMIN");
+    user.setIsActive(true);
+    user.setRegistrationDate(LocalDate.now());
+
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+    User savedUser = userRepository.save(user);
+
+    Company savedCompany;
+
+    if (companyRepository.existsByTaxNo(company.getTaxNo())) {
+
+        savedCompany = companyRepository
+                .findByTaxNo(company.getTaxNo())
+                .orElseThrow(() -> new RuntimeException("Şirket bulunamadı"));
+
+    } else {
+
+        savedCompany = companyRepository.save(company);
+    }
+
+    Manager manager = new Manager();
+    manager.setUser(savedUser);
+    manager.setCompany(savedCompany);
+
+    managerRepository.save(manager);
+
+    return savedUser;
+}
 
     // ✅ LOGIN
-    public User login(String email, String password) {
+public User login(String email, String password) {
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
+    System.out.println(email);
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Şifre yanlış");
-        }
+    User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı"));
 
-        // 🔐 ŞİFREYİ GİZLE
-        user.setPassword(null);
-
-        return user;
+    if (!passwordEncoder.matches(password, user.getPassword())) {
+        throw new RuntimeException("Şifre yanlış");
     }
+
+    // 🔐 ŞİFREYİ GİZLE
+    user.setPassword(null);
+
+    return user;
+}
+
 }
 

@@ -44,21 +44,6 @@ function showSection(name) {
     araclariYukle();
 }
 
-// ===== FORM SEKME =====
-function switchFormTab(btn, tab) {
-
-  document.querySelectorAll('.form-tab')
-    .forEach(t => t.classList.remove('active'));
-
-  document.querySelectorAll('.form-tab-content')
-    .forEach(c => c.style.display = 'none');
-
-  btn.classList.add('active');
-
-  document.getElementById('tab-' + tab)
-    .style.display = 'block';
-}
-
 // ===== FORM TEMİZLE =====
 function temizleForm() {
 
@@ -68,8 +53,7 @@ function temizleForm() {
     'yil',
     'gunluk_ucret',
     'aciklama',
-    'airbag_sayisi',
-    'gorsel_url'
+    'airbag_sayisi'
   ].forEach(id => {
 
     const el = document.getElementById(id);
@@ -83,6 +67,31 @@ function temizleForm() {
 
 // ===== ARAÇ EKLE =====
 async function aracEkle() {
+
+  const imageFile =
+    document.getElementById('vehicleImage').files[0];
+
+  let imageUrl = '';
+
+  // FOTO YÜKLE
+  if (imageFile) {
+
+    const formData = new FormData();
+
+    formData.append('file', imageFile);
+
+    const uploadResponse =
+      await fetch(
+        'http://localhost:8080/api/upload',
+        {
+          method: 'POST',
+          body: formData
+        }
+      );
+
+    imageUrl =
+      await uploadResponse.text();
+  }
 
   const body = {
 
@@ -105,8 +114,7 @@ async function aracEkle() {
     description:
       document.getElementById('aciklama').value,
 
-    imageUrl:
-      document.getElementById('gorsel_url').value,
+    imageUrl: imageUrl,
 
     airbagCount:
       parseInt(
@@ -170,17 +178,20 @@ async function araclariYukle() {
   const token =
     localStorage.getItem('token');
 
+  const companyId =
+    localStorage.getItem('companyId');
+
   const tbody =
     document.getElementById('aracTableBody');
 
   tbody.innerHTML =
-    '<tr><td colspan="9">Yükleniyor...</td></tr>';
+    '<tr><td colspan="10">Yükleniyor...</td></tr>';
 
   try {
 
     const response =
       await fetch(
-        'http://localhost:8080/api/vehicles',
+        `http://localhost:8080/api/vehicles/company/${companyId}`,
         {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -195,6 +206,18 @@ async function araclariYukle() {
       data.map(arac => `
 
       <tr>
+
+        <td>
+          <img
+            src="${arac.imageUrl}"
+            width="120"
+            style="
+              border-radius:10px;
+              object-fit:cover;
+              height:70px;
+            "
+          />
+        </td>
 
         <td>
           <strong>${arac.plateNo}</strong>
@@ -258,7 +281,7 @@ async function araclariYukle() {
     console.error(error);
 
     tbody.innerHTML =
-      '<tr><td colspan="9">Veriler yüklenemedi.</td></tr>';
+      '<tr><td colspan="10">Veriler yüklenemedi.</td></tr>';
   }
 }
 

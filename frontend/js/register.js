@@ -135,29 +135,54 @@ async function registerYonetici() {
   const vergino = document.getElementById('y_vergino').value.trim();
   const city = document.getElementById('y_city').value.trim();
   const district = document.getElementById('y_district').value.trim();
+  const neighborhood = document.getElementById('y_neighborhood').value.trim();
+const street = document.getElementById('y_street').value.trim();
+const buildingNo = document.getElementById('y_buildingNo').value.trim();
+const companyEmail = document.getElementById('y_companyEmail').value.trim();
+const sirketTel = document.getElementById('y_sirket_tel').value.trim();
   const gorev = document.getElementById('y_gorev').value;
 
-  if (!adsoyad || !email || !telefon || !sifre || !tc || !sirket || !vergino || !gorev) {
-    alert('Lütfen tüm alanları doldurun.');
-    return;
-  }
+  if (
+  !adsoyad ||
+  !email ||
+  !telefon ||
+  !sifre ||
+  !tc ||
+  !sirket ||
+  !vergino ||
+  !city ||
+  !district ||
+  !neighborhood ||
+  !street ||
+  !buildingNo ||
+  !companyEmail ||
+  !gorev
+) {
+  alert('Lütfen tüm alanları doldurun.');
+  return;
+}
 
   if (sifre !== sifre2) {
     alert('Şifreler eşleşmiyor.');
     return;
   }
 
-  const body = {
-    fullName: adsoyad,
-    email,
-    phone: telefon,
-    password: sifre,
-    nationalId: tc,
-    companyName: sirket,
-    taxNumber: vergino,
-    city: city,
-    district: district
-  };
+const body = {
+  fullName: adsoyad,
+  email,
+  phone: telefon,
+  password: sifre,
+  nationalId: tc,
+  companyName: sirket,
+  taxNumber: vergino,
+  city,
+  district,
+  neighborhood,
+  street,
+  buildingNo,
+  companyEmail,
+  companyPhone: sirketTel
+};
 
   try {
     const response = await fetch('http://localhost:8080/api/users/register-admin', {

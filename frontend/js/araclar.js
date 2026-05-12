@@ -55,7 +55,7 @@ function araclariGoster() {
 // ===== KART HTML =====
 function kartHTML(arac) {
   const gorsel = arac.imageUrl
-    ? `<img src="http://127.0.0.1:5500/${arac.imageUrl}" alt="${arac.plateNo || "Araç"}">`
+  ? `<img src="${arac.imageUrl}" alt="${arac.plateNo || "Araç"}">`
     : `<div class="no-image">🚗</div>`;
 
   const yilBadge = arac.year
